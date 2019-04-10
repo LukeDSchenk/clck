@@ -1,0 +1,31 @@
+IDEAS!!!!!
+-Program mimics a physical clock in system
+   -[clck in] <"working-on"> starts timer, option to add what you're doing
+   -[clck out] ends timer
+   -[clck help] displays options, etc
+   -[clck version] displays version
+   -[clck status] outputs current status of the timer (active?, start-time)
+   -[clck new-ts] <name> creates a new timesheet called <name> (store timesheets in a folder)
+                  -default name of time sheets comes from current time and date
+   -[clck current] prints the name of the current timesheet
+   -[clck change] <ts-name> changes the current ts to the specified one
+   -[clck show (option: all)] prints the contents of the current timesheet, all shows all timesheets
+   -[clck timesheets] displays the names of all timesheeets
+-Timesheet recorded to will always be the most current
+-Program compares end time to the last start time
+-Program outputs all sessions to a log file for records
+-Optional flag or parameter to add a string about what you're working on!!!!! Cool!
+-Yes!
+-This is going to be good!
+-Huzzah!
+-Yee
+-I'm done
+
+*note that above parameters (especially names) are subject to change
+
+**************
+side note, write this in python, bash, or both! (python is the shit)
+
+https://askubuntu.com/questions/430196/how-to-pass-arguments-to-functions-while-executing-a-python-script-from-terminal
+
+THIS^
