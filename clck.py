@@ -1,9 +1,9 @@
 #/usr/bin/python3
-import sys
-import argparse
+import arguments
 
-#list of args passed by terminal, [0] is filepath, start at [1]
-params = sys.argv
+print("""This file should contain the main logic of the program. I think that I
+         may or may not end of moving the content from arguments.py back over here,
+         but for now this is how we are going to have it split up.""")
 
 if __name__ == "__main__":
     pass
