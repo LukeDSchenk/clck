@@ -13,6 +13,8 @@ class timesheet:
         name = name + ".csv"
 
         return name
+    
+    #add a function for clock in and clock out
 
 if __name__ == "__main__":
     ts = timesheet("")
