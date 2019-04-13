@@ -9,25 +9,27 @@ def parse_args(list=sys.argv):
      features for those who wish to use them."""
 
     parser = argparse.ArgumentParser(description=welcome)
-    parser.add_argument('--test', '-t', help='just an example argument')
+    #parser.add_argument('--test', '-t', help='just an example argument')
 
     subparsers = parser.add_subparsers(help='sub-command help')
 
     in_parser = subparsers.add_parser('in', description='start the timer on the current timesheet',help='start the timer')
     in_parser.set_defaults(func=in_command)
+    in_parser.add_argument('--note', '-n', help="add a brief description of what you're working on")
 
     out_parser = subparsers.add_parser('out',description='stop the timer on the current timesheet', help='stop the timer')
     out_parser.set_defaults(func=out_command)
 
+    # Calls the appropriate function and passes sys.argv
     args = parser.parse_args()
-    args.func()
+    args.func(args)
 
 # Runs on clock in command
-def in_command():
+def in_command(args):
     print("clck in!")
 
 # Runs on clock out command
-def out_command():
+def out_command(args):
     print("clck out!")
 
 if __name__ == "__main__":
