@@ -18,7 +18,6 @@ def parse_args(list=sys.argv):
                                        help='out help')
 
     args = parser.parse_args()
-
     print(args)
 
 if __name__ == "__main__":

@@ -5,20 +5,22 @@ class timesheet:
     def __init__(self, name=""):
         self.header = ["DATE", "START", "END", "HOURS", "NOTES"]
         self.name = self.init_name(name)
+        self.ts_folder = "./timesheets/"
 
     def init_name(self, name):
         dt = datetime.now()
         if name == "":
             name = dt.strftime("%d-%m-%Y--%H:%M:%S")
-        name = name + ".csv"
 
         return name
-    
-    #add a function for clock in and clock out
+
+    def create_sheet(self):
+        with open(self.ts_folder + self.name + ".csv", "w", encoding="utf-8", newline='') as timesheet:
+            writer = csv.writer(timesheet)
+            writer.writerow(self.header)
 
 if __name__ == "__main__":
-    ts = timesheet("")
-    with open("./timesheets/" + ts.name, "w", encoding="utf-8", newline="") as new_ts:
-        writer = csv.writer(new_ts)
-
-        writer.writerow(ts.header)
+    ts = timesheet()
+    ts2 = timesheet("create_sheet_test")
+    ts.create_sheet()
+    ts2.create_sheet()
