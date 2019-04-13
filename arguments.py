@@ -12,13 +12,23 @@ def parse_args(list=sys.argv):
     parser.add_argument('--test', '-t', help='just an example argument')
 
     subparsers = parser.add_subparsers(help='sub-command help')
-    in_parser = subparsers.add_parser('in', description='start the timer on the current timesheet',
-                                      help='in help')
-    out_parser = subparsers.add_parser('out',description='stop the timer on the current timesheet',
-                                       help='out help')
+
+    in_parser = subparsers.add_parser('in', description='start the timer on the current timesheet',help='in help')
+    in_parser.set_defaults(func=in_command)
+
+    out_parser = subparsers.add_parser('out',description='stop the timer on the current timesheet', help='out help')
+    out_parser.set_defaults(func=out_command)
 
     args = parser.parse_args()
     print(args)
+
+# Runs on clock in command
+def in_command():
+    pass
+
+# Runs on clock out command
+def out_command():
+    pass
 
 if __name__ == "__main__":
     parse_args()
