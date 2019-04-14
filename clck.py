@@ -27,6 +27,8 @@ def parse_args(list=sys.argv):
 # Runs on clock in command
 def in_command(args):
     print("clck in!")
+    if args.note:
+        print(args.note)
 
 # Runs on clock out command
 def out_command(args):
