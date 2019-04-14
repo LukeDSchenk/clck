@@ -1,5 +1,4 @@
 import csv
-import time
 
 def read_status():
     with open("status.csv", "r") as infile:

@@ -1,8 +1,9 @@
 import argparse
 import sys
 import csv
+import time
 from timesheet import timesheet
-from status import *
+from status import read_status, write_status
 
 STATUS_INFO = read_status()
 CURRENT_TS = STATUS_INFO[0]
@@ -33,7 +34,7 @@ def parse_args(list=sys.argv):
     out_parser.add_argument('--discard', '-d', help='stop the timer without writing the session to a timesheet', action='store_true')
     out_parser.add_argument('--verbose', '-v', help='more in depth description')
 
-    # Calls the appropriate function and passes sys.argv
+    # Calls the appropriate function and passes parsed args
     args = parser.parse_args()
     args.func(args)
 
@@ -48,9 +49,18 @@ def out_command(args):
     if args.discard:
         print("Discard the current session without writing to a timesheet? (Y/N): ")
 
-def start_timer():
-    STARTTIME = time.time()
-    STARTDATE = time.ctime(STARTTIME)
+def start_timer(note=''):
+    global STARTTIME
+    global STARTDATE
+    global NOTE
+
+    if STATUS == 'ACTIVE':
+        print("The timer is already active (started: {})".format(STARTDATE))
+    else:
+        STARTTIME = time.time()
+        STARTDATE = time.ctime(STARTTIME)
+        NOTE = note
+        write_status(CURRENT_TS, STATUS, STARTTIME, STARTDATE, NOTE)
 
 def stop_timer(STARTTIME):
     pass
@@ -59,5 +69,4 @@ def main():
     pass
 
 if __name__ == "__main__":
-    write_status(CURRENT_TS, STATUS, STARTTIME, STARTDATE, "test")
-    print(read_status())
+    start_timer("working on clck")
