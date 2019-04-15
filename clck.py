@@ -34,6 +34,9 @@ def parse_args(list=sys.argv):
     out_parser.add_argument('--discard', '-d', help='stop the timer without writing the session to a timesheet', action='store_true')
     out_parser.add_argument('--verbose', '-v', help='more in depth description')
 
+    status_parser = subparsers.add_parser('status', description='show the current status of the timer', help='show timer status')
+    status_parser.set_defaults(func=status_command)
+
     # Calls the appropriate function and passes parsed args
     args = parser.parse_args()
     args.func(args)
@@ -48,6 +51,9 @@ def in_command(args):
 def out_command(args):
     if args.discard:
         print("Discard the current session without writing to a timesheet? (Y/N): ")
+
+def status_command(args):
+    pass
 
 def start_timer(note=''):
     global STARTTIME
