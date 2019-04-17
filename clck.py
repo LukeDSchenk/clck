@@ -25,11 +25,11 @@ def parse_args(list=sys.argv):
 
     subparsers = parser.add_subparsers(help='sub-command help')
 
-    in_parser = subparsers.add_parser('in', description='start the timer on the current timesheet',help='start the timer')
+    in_parser = subparsers.add_parser('in', description='start the timer on the current timesheet',help='start the timer [--note]')
     in_parser.set_defaults(func=in_command)
     in_parser.add_argument('--note', '-n', help="add a brief description of what you're working on")
 
-    out_parser = subparsers.add_parser('out',description='stop the timer on the current timesheet', help='stop the timer')
+    out_parser = subparsers.add_parser('out',description='stop the timer on the current timesheet', help='stop the timer [--discard]')
     out_parser.set_defaults(func=out_command)
     out_parser.add_argument('--discard', '-d', help='stop the timer without writing the session to a timesheet', action='store_true')
 
@@ -43,7 +43,7 @@ def parse_args(list=sys.argv):
 # Runs on clock in command
 def in_command(args):
     if args.note:
-        start_timer(note)
+        start_timer(args.note)
     else:
         start_timer()
 
@@ -62,7 +62,11 @@ def out_command(args):
 
 def status_command(args):
     if STATUS == 'ACTIVE':
-        print("Status: Timer ACTIVE since " + STARTDATE)
+        print("Status: Timer ACTIVE since " + STARTDATE, end='')
+        if NOTE != '':
+            print(": " + NOTE)
+        else:
+            print()
     elif STATUS == 'INACTIVE':
         print("Status: Timer INACTIVE (use [clck in] to start it)")
     else:
@@ -96,6 +100,8 @@ def stop_timer(discard=False):
         if discard == False:
             record_time(CURRENT_TS, STARTTIME, STARTDATE, NOTE)
         print("clcked out as of " + time.ctime() + "!")
+        if discard == True:
+            print("This session was not recorded")
 
 def main():
     parse_args()
