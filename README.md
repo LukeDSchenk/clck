@@ -7,10 +7,11 @@ clck is in a VERY early stage of development. You may come across it in a state 
 ## Currently supported uses
 Do not modify the timesheets/timesheet.csv file. As of right now, this is the only supported timesheet, but in the near future you will be able to create multiple timesheets and change which ones you are currently recording to. 
 
-As of right now, clck can use the following commands:
-* in (--note)
-* out (--discard)
-* --help works for clck.py, as well as for the `in` and `out` sub-commands
+As of right now, clck can use the following sub-commands and flags:
+* in (--note/-n)
+* out (--discard/-d)
+* status
+* --help/-h works for clck.py, as well as all sub-commands
 
 All recordings are stored locally in the ./timesheets/timesheet.csv file.
 
