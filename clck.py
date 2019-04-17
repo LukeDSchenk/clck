@@ -42,7 +42,6 @@ def parse_args(list=sys.argv):
 
 # Runs on clock in command
 def in_command(args):
-    print("clck in!")
     if args.note:
         start_timer(note)
     else:
@@ -60,10 +59,14 @@ def out_command(args):
             stop_timer()
     else:
         stop_timer()
-    print("clck out!")
 
 def status_command(args):
-    pass
+    if STATUS == 'ACTIVE':
+        print("Status: Timer ACTIVE since " + STARTDATE)
+    elif STATUS == 'INACTIVE':
+        print("Status: Timer INACTIVE (use [clck in] to start it)")
+    else:
+        print("The status.csv file may have been destroyed or corrupted. Refer to README to make a new one.")
 
 def start_timer(note=''):
     global STATUS
@@ -79,6 +82,7 @@ def start_timer(note=''):
         STARTDATE = time.ctime(STARTTIME)
         NOTE = note
         write_status(CURRENT_TS, STATUS, STARTTIME, STARTDATE, NOTE)
+        print("clcked in as of " + STARTDATE + "!")
 
 #Beautiful
 def stop_timer(discard=False):
@@ -91,6 +95,7 @@ def stop_timer(discard=False):
         write_status(CURRENT_TS, STATUS, STARTTIME, STARTDATE, NOTE)
         if discard == False:
             record_time(CURRENT_TS, STARTTIME, STARTDATE, NOTE)
+        print("clcked out as of " + time.ctime() + "!")
 
 def main():
     parse_args()
