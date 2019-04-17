@@ -103,8 +103,5 @@ def stop_timer(discard=False):
         if discard == True:
             print("This session was not recorded")
 
-def main():
-    parse_args()
-
 if __name__ == "__main__":
-    main()
+    parse_args()
