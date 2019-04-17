@@ -1,13 +1,17 @@
 import csv
 from datetime import datetime
+import os
+import time
 
+#Multiple timesheet functionality coming soon!
 class timesheet:
     def __init__(self, name=""):
-        self.header = ["DATE", "START", "END", "HOURS", "NOTES"]
+        self.header = ["START", "END", "HOURS", "NOTE"]
         self.name = self.init_name(name)
         self.status = "ACTIVE"
         self.ts_folder = "./timesheets/"
-        os.mkdir(self.ts_folder, exist_ok=True)
+        os.makedirs(self.ts_folder, exist_ok=True)
+        self.create_csv()
 
     def init_name(self, name):
         dt = datetime.now()
@@ -21,8 +25,15 @@ class timesheet:
             writer = csv.writer(timesheet)
             writer.writerow(self.header)
 
+def record_time(current_ts, starttime, startdate, note):
+    endtime = time.time()
+    end_date = time.ctime()
+    hours = round(((endtime - float(starttime)) / 3600), 2)
+    new_line = [startdate, end_date, hours, note]
+
+    with open("./timesheets/" + current_ts + ".csv", "a", encoding='utf-8', newline='') as timesheet:
+        writer = csv.writer(timesheet)
+        writer.writerow(new_line)
+
 if __name__ == "__main__":
-    ts = timesheet()
-    ts2 = timesheet("create_sheet_test")
-    ts.create_csv()
-    ts2.create_csv()
+    ts = timesheet("timesheet")
